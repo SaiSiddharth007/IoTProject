@@ -1,0 +1,274 @@
+/* Scan Page Specific Styles */
+.scan-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .scan-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .scan-header h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .scan-header p {
+    color: var(--text-muted);
+    font-size: var(--font-size-lg);
+  }
+  
+  .scan-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+  
+  /* Camera Section */
+  .camera-section {
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .camera-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .camera-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+  }
+  
+  .camera-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .camera-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .camera-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  
+  /* Analysis Section */
+  .analysis-section {
+    min-height: 400px;
+  }
+  
+  .analysis-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--text-muted);
+  }
+  
+  .analysis-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .analysis-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--text-muted);
+  }
+  
+  .analysis-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  
+  /* Plant Identification */
+  .plant-identification {
+    border-bottom: 1px solid var(--border-primary);
+    padding-bottom: var(--spacing-md);
+  }
+  
+  .identification-result {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+  
+  .plant-image-result {
+    width: 5rem;
+    height: 5rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .plant-image-result img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .plant-details-result h5 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .plant-details-result p {
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .confidence-score {
+    font-size: var(--font-size-sm);
+    color: var(--accent-green);
+    font-weight: 500;
+  }
+  
+  /* Health Metrics */
+  .health-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: var(--spacing-md);
+  }
+  
+  .health-metric {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+  }
+  
+  .metric-icon {
+    font-size: 1.5rem;
+  }
+  
+  .metric-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .metric-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+  }
+  
+  .metric-value {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  /* Recommendations */
+  .recommendation-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+  
+  .recommendation-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: var(--spacing-md);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+  }
+  
+  .recommendation-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  
+  .recommendation-text h5 {
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .recommendation-text p {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+  }
+  
+  .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--spacing-md);
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 1024px) {
+    .scan-layout {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .scan-content {
+      flex-direction: row;
+      gap: var(--spacing-xl);
+    }
+  
+    .camera-section,
+    .analysis-section {
+      flex: 1;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .scan-layout {
+      grid-template-columns: 1fr;
+      padding: var(--spacing-md) 0;
+    }
+  
+    .camera-controls {
+      flex-direction: column;
+    }
+  
+    .action-buttons {
+      flex-direction: column;
+    }
+  
+    .identification-result {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .scan-header h1 {
+      font-size: var(--font-size-2xl);
+    }
+  
+    .scan-header p {
+      font-size: var(--font-size-base);
+    }
+  }
+  

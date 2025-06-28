@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteX-HydroHero - Smart Irrigation System</title>
+    <meta name="description" content="AI-powered smart irrigation system for precise plant watering">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <!-- Initial Auth Popup -->
+    <div id="authPopup" class="popup-overlay">
+        <div class="popup-card">
+            <button class="popup-close" onclick="closeAuthPopup()">&times;</button>
+            <div class="popup-content">
+                <h2>Welcome to ByteX-HydroHero</h2>
+                <p>Get started with your smart irrigation system</p>
+                <div class="popup-buttons">
+                    <button class="btn btn-primary" onclick="showAuthModal('signup')">Sign Up</button>
+                    <button class="btn btn-outline" onclick="showAuthModal('login')">Login</button>
+                    <button class="btn btn-ghost" onclick="closeAuthPopup()">I'll do later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            <div class="modal-content">
+                <h2 id="authTitle">Welcome Back</h2>
+                <p id="authSubtitle">Sign in to access plant analysis features</p>
+                <form id="authForm" onsubmit="handleAuth(event)">
+                    <div id="nameField" class="form-group hidden">
+                        <label>Full Name</label>
+                        <input type="text" name="name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="password-input">
+                            <input type="password" name="password" placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                        </div>
+                    </div>
+                    <div id="confirmPasswordField" class="form-group hidden">
+                        <label>Confirm Password</label>
+                        <input type="password" name="confirmPassword" placeholder="Confirm your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="authSubmit">Sign In</button>
+                </form>
+                <div class="auth-switch">
+                    <button id="authSwitchBtn" onclick="switchAuthMode()">Don't have an account? Sign up</button>
+                </div>
+                <div class="auth-terms">
+                    <p>By continuing, you agree to our Terms of Service and Privacy Policy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">ByteX-HydroHero</span>
+                </div>
+                <div class="header-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <div class="theme-toggle-track">
+                            <div class="theme-toggle-thumb">
+                                <span class="theme-icon">🌙</span>
+                            </div>
+                        </div>
+                    </button>
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Scrolling Text -->
+    <div class="scrolling-text">
+        <div class="scrolling-content">
+            <span>• Smart irrigation for the modern garden • AI-powered plant monitoring • Save water, save money • Precision watering technology • Automated plant care • Sustainable gardening</span>
+            <span>• Smart irrigation for the modern garden • AI-powered plant monitoring • Save water, save money • Precision watering technology • Automated plant care • Sustainable gardening</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="layout">
+                <!-- Sidebar -->
+                <aside class="sidebar" id="sidebar">
+                    <nav class="nav">
+                        <button class="nav-item active" onclick="showTab('dashboard')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            Dashboard
+                        </button>
+                        <button class="nav-item" onclick="showTab('schedule')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                            </svg>
+                            Schedule
+                        </button>
+                        <button class="nav-item" onclick="showTab('analytics')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            </svg>
+                            Analytics
+                        </button>
+                        <button class="nav-item" onclick="showTab('settings')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                            </svg>
+                            Settings
+                        </button>
+                        <button class="nav-item" onclick="showTab('team')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A3.01 3.01 0 0 0 16.5 6.5h-1c-.8 0-1.5.7-1.5 1.5v6h-2v-6c0-.8-.7-1.5-1.5-1.5h-1c-1.1 0-2 .9-2 2v7.5H10V22h10zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm1.5 16v-6H9l-1.5-4.5c-.3-.9-1.1-1.5-2-1.5h-1c-.8 0-1.5.7-1.5 1.5V18H1v4h6z"/>
+                            </svg>
+                            Team Info
+                        </button>
+                        <button class="nav-item" onclick="showTab('about')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM13,17h-2v-6h2v6zM13,9h-2L11,7h2v2z"/>
+                            </svg>
+                            About
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- Content Area -->
+                <div class="content">
+                    <!-- Dashboard Tab -->
+                    <div id="dashboard" class="tab-content active">
+                        <div class="stats-grid">
+                            <div class="stat-card stat-green">
+                                <div class="stat-icon">🌱</div>
+                                <div class="stat-info">
+                                    <p class="stat-label">Total Plants</p>
+                                    <h3 class="stat-value">3</h3>
+                                </div>
+                            </div>
+                            <div class="stat-card stat-blue">
+                                <div class="stat-icon">💧</div>
+                                <div class="stat-info">
+                                    <p class="stat-label">Need Water</p>
+                                    <h3 class="stat-value">2</h3>
+                                </div>
+                            </div>
+                            <div class="stat-card stat-orange">
+                                <div class="stat-icon">🌡️</div>
+                                <div class="stat-info">
+                                    <p class="stat-label">Temperature</p>
+                                    <h3 class="stat-value">75°F</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quick-actions">
+                            <a href="pages/scan.html" class="btn btn-primary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                Scan Plants
+                            </a>
+                            <a href="pages/water-now.html" class="btn btn-secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+                                </svg>
+                                Water Now
+                            </a>
+                            <button class="btn btn-outline" onclick="refreshData()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                                </svg>
+                                Refresh Data
+                            </button>
+                            <button class="btn btn-outline">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                </svg>
+                                Add Plant
+                            </button>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-header">
+                                <h2>Your Plants</h2>
+                                <button class="btn btn-ghost">View All</button>
+                            </div>
+                            <div class="plants-grid">
+                                <div class="plant-card">
+                                    <div class="plant-header">
+                                        <div class="plant-image">
+                                            <img src="assets/images/tomato-plant.png" alt="Tomato Plant">
+                                        </div>
+                                        <div class="plant-info">
+                                            <h3>Tomato Plant</h3>
+                                            <div class="plant-status">
+                                                <span class="status-badge status-healthy">Healthy</span>
+                                                <span class="water-level water-medium">💧 Medium</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="plant-details">
+                                        <div class="detail-item">
+                                            <span class="detail-icon">💧</span>
+                                            <span>Last watered: 2 days ago</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-icon">⏰</span>
+                                            <span>Next watering: Tomorrow, 07:00</span>
+                                        </div>
+                                    </div>
+                                    <div class="plant-actions">
+                                        <button class="action-btn">⚙️ Settings</button>
+                                        <button class="action-btn" onclick="waterPlant('Tomato Plant')">💧 Water Now</button>
+                                        <button class="action-btn">→ Details</button>
+                                    </div>
+                                </div>
+
+                                <div class="plant-card">
+                                    <div class="plant-header">
+                                        <div class="plant-image">
+                                            <img src="assets/images/basil-herb.png" alt="Basil Herb">
+                                        </div>
+                                        <div class="plant-info">
+                                            <h3>Basil Herb</h3>
+                                            <div class="plant-status">
+                                                <span class="status-badge status-needs-water">Needs Water</span>
+                                                <span class="water-level water-low">💧 Low</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="plant-details">
+                                        <div class="detail-item">
+                                            <span class="detail-icon">💧</span>
+                                            <span>Last watered: 4 days ago</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-icon">⏰</span>
+                                            <span>Next watering: Today, 08:30</span>
+                                        </div>
+                                    </div>
+                                    <div class="plant-actions">
+                                        <button class="action-btn">⚙️ Settings</button>
+                                        <button class="action-btn" onclick="waterPlant('Basil Herb')">💧 Water Now</button>
+                                        <button class="action-btn">→ Details</button>
+                                    </div>
+                                </div>
+
+                                <div class="plant-card">
+                                    <div class="plant-header">
+                                        <div class="plant-image">
+                                            <img src="assets/images/rose-bush.png" alt="Rose Bush">
+                                        </div>
+                                        <div class="plant-info">
+                                            <h3>Rose Bush</h3>
+                                            <div class="plant-status">
+                                                <span class="status-badge status-needs-water">Needs Water</span>
+                                                <span class="water-level water-low">💧 Low</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="plant-details">
+                                        <div class="detail-item">
+                                            <span class="detail-icon">💧</span>
+                                            <span>Last watered: 3 days ago</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-icon">⏰</span>
+                                            <span>Next watering: Today, 19:00</span>
+                                        </div>
+                                    </div>
+                                    <div class="plant-actions">
+                                        <button class="action-btn">⚙️ Settings</button>
+                                        <button class="action-btn" onclick="waterPlant('Rose Bush')">💧 Water Now</button>
+                                        <button class="action-btn">→ Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h2>System Features</h2>
+                            <div class="features-grid">
+                                <div class="feature-card feature-large feature-orange">
+                                    <div class="feature-content">
+                                        <div class="feature-icon">📷</div>
+                                        <h3>Smart Plant Monitoring</h3>
+                                        <p>Our advanced camera system continuously monitors your plants, capturing high-resolution images to analyze their health and water needs in real-time.</p>
+                                        <div class="feature-testimonial">
+                                            <p>"ByteX-HydroHero reduced my garden water usage by 40% while improving plant health." — Garden Enthusiast</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="feature-card feature-green">
+                                    <div class="feature-icon">🧠</div>
+                                    <h3>AI-Powered Analysis</h3>
+                                    <p>Our ML models (YOLO, CNN) analyze plant images to determine water needs with precision, eliminating guesswork.</p>
+                                </div>
+                                <div class="feature-card feature-blue">
+                                    <div class="feature-icon">📱</div>
+                                    <h3>Mobile Control</h3>
+                                    <p>Control your irrigation system from anywhere with our intuitive mobile app interface.</p>
+                                </div>
+                                <div class="feature-card feature-amber">
+                                    <div class="feature-icon">💧</div>
+                                    <h3>Precision Watering</h3>
+                                    <p>Target specific plants with exactly the right amount of water, reducing waste and improving plant health.</p>
+                                </div>
+                                <div class="feature-card feature-purple">
+                                    <div class="feature-icon">📊</div>
+                                    <h3>Data Insights</h3>
+                                    <p>Track water usage and plant health over time with detailed analytics and recommendations.</p>
+                                </div>
+                                <div class="feature-card feature-cyan">
+                                    <div class="feature-icon">☁️</div>
+                                    <h3>Weather Integration</h3>
+                                    <p>Automatically adjusts watering schedules based on local weather forecasts to optimize water usage.</p>
+                                </div>
+                                <div class="feature-card feature-emerald">
+                                    <div class="feature-icon">⚡</div>
+                                    <h3>Energy Efficient</h3>
+                                    <p>Low-power components and smart scheduling ensure minimal energy consumption for sustainable operation.</p>
+                                </div>
+                                <div class="feature-card feature-teal">
+                                    <div class="feature-icon">🌿</div>
+                                    <h3>Eco-Friendly</h3>
+                                    <p>Conserve water and promote sustainable gardening practices with our smart irrigation technology.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other tabs content would be included here -->
+                    <div id="schedule" class="tab-content">
+                        <h2>Schedule Management</h2>
+                        <p>Watering schedule interface will be implemented here.</p>
+                    </div>
+
+                    <div id="analytics" class="tab-content">
+                        <h2>Analytics Dashboard</h2>
+                        <p>Analytics and reporting interface will be implemented here.</p>
+                    </div>
+
+                    <div id="settings" class="tab-content">
+                        <h2>System Settings</h2>
+                        <p>Settings configuration interface will be implemented here.</p>
+                    </div>
+
+                    <div id="team" class="tab-content">
+                        <h2>Team Information</h2>
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="team-header">
+                                    <h3>Byte X</h3>
+                                    <p>HydroHero Smart Irrigation System</p>
+                                </div>
+                                <div class="team-grid">
+                                    <div class="team-member team-member-blue">
+                                        <div class="member-avatar">SS</div>
+                                        <h4>Sai Siddharth</h4>
+                                        <div class="member-links">
+                                            <a href="https://www.instagram.com/sai_siddharth1/" target="_blank" class="btn btn-instagram">📷 Instagram</a>
+                                            <a href="https://in.linkedin.com/in/m-v-sai-siddharth-2a3a23208" target="_blank" class="btn btn-linkedin">💼 LinkedIn</a>
+                                            <a href="https://wa.me/919550853472" target="_blank" class="btn btn-whatsapp">💬 WhatsApp</a>
+                                        </div>
+                                    </div>
+                                    <div class="team-member team-member-orange">
+                                        <div class="member-avatar">CN</div>
+                                        <h4>Chirag Nahar</h4>
+                                        <div class="member-links">
+                                            <a href="tel:+918306380139" class="btn btn-phone">📞 Call: +91 83063 80139</a>
+                                            <a href="https://wa.me/918306380139" target="_blank" class="btn btn-whatsapp">💬 WhatsApp</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="about" class="tab-content">
+                        <h2>About ByteX-HydroHero</h2>
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Our Mission</h3>
+                                <p>At ByteX-HydroHero, we're revolutionizing agriculture through intelligent irrigation. Our AI-powered system combines computer vision, machine learning, and IoT technology to create the most efficient watering solution for modern gardening.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 ByteX-HydroHero. All rights reserved.</p>
+                <div class="footer-links">
+                    <button onclick="showTab('about')">About</button>
+                    <button onclick="showTab('about')">Contact</button>
+                    <button>Privacy</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

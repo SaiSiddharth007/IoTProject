@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Now - ByteX-HydroHero</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/water.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">ByteX-HydroHero</span>
+                </div>
+                <div class="header-actions">
+                    <a href="../index.html" class="btn btn-outline">← Back to Dashboard</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <div class="theme-toggle-track">
+                            <div class="theme-toggle-thumb">
+                                <span class="theme-icon">🌙</span>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="water-layout">
+                <div class="water-header">
+                    <h1>Water Now</h1>
+                    <p>Manually control your irrigation system</p>
+                </div>
+
+                <div class="water-content">
+                    <div class="plant-selection">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Select Plants to Water</h3>
+                                <div class="plant-grid">
+                                    <div class="water-plant-card" data-plant="tomato">
+                                        <div class="plant-checkbox">
+                                            <input type="checkbox" id="tomato" onchange="togglePlant('tomato')">
+                                            <label for="tomato"></label>
+                                        </div>
+                                        <div class="plant-image">
+                                            <img src="../assets/images/tomato-plant.png" alt="Tomato Plant">
+                                        </div>
+                                        <div class="plant-info">
+                                            <h4>Tomato Plant</h4>
+                                            <div class="plant-status">
+                                                <span class="status-badge status-healthy">Healthy</span>
+                                                <span class="water-level water-medium">💧 Medium</span>
+                                            </div>
+                                            <div class="plant-details">
+                                                <p>Last watered: 2 days ago</p>
+                                                <p>Recommended: 200ml</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="water-plant-card" data-plant="basil">
+                                        <div class="plant-checkbox">
+                                            <input type="checkbox" id="basil" onchange="togglePlant('basil')">
+                                            <label for="basil"></label>
+                                        </div>
+                                        <div class="plant-image">
+                                            <img src="../assets/images/basil-herb.png" alt="Basil Herb">
+                                        </div>
+                                        <div class="plant-info">
+                                            <h4>Basil Herb</h4>
+                                            <div class="plant-status">
+                                                <span class="status-badge status-needs-water">Needs Water</span>
+                                                <span class="water-level water-low">💧 Low</span>
+                                            </div>
+                                            <div class="plant-details">
+                                                <p>Last watered: 4 days ago</p>
+                                                <p>Recommended: 150ml</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="water-plant-card" data-plant="rose">
+                                        <div class="plant-checkbox">
+                                            <input type="checkbox" id="rose" onchange="togglePlant('rose')">
+                                            <label for="rose"></label>
+                                        </div>
+                                        <div class="plant-image">
+                                            <img src="../assets/images/rose-bush.png" alt="Rose Bush">
+                                        </div>
+                                        <div class="plant-info">
+                                            <h4>Rose Bush</h4>
+                                            <div class="plant-status">
+                                                <span class="status-badge status-needs-water">Needs Water</span>
+                                                <span class="water-level water-low">💧 Low</span>
+                                            </div>
+                                            <div class="plant-details">
+                                                <p>Last watered: 3 days ago</p>
+                                                <p>Recommended: 300ml</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="water-controls">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Watering Controls</h3>
+                                
+                                <div class="control-section">
+                                    <h4>Water Amount</h4>
+                                    <div class="amount-controls">
+                                        <div class="amount-presets">
+                                            <button class="preset-btn" onclick="setAmount(100)">100ml</button>
+                                            <button class="preset-btn" onclick="setAmount(200)">200ml</button>
+                                            <button class="preset-btn active" onclick="setAmount(300)">300ml</button>
+                                            <button class="preset-btn" onclick="setAmount(500)">500ml</button>
+                                        </div>
+                                        <div class="custom-amount">
+                                            <label for="customAmount">Custom Amount (ml)</label>
+                                            <input type="number" id="customAmount" value="300" min="50" max="1000" onchange="updateAmount()">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-section">
+                                    <h4>Watering Mode</h4>
+                                    <div class="mode-selection">
+                                        <div class="mode-option">
+                                            <input type="radio" id="gentle" name="mode" value="gentle" checked>
+                                            <label for="gentle">
+                                                <div class="mode-icon">🌿</div>
+                                                <div class="mode-info">
+                                                    <span class="mode-name">Gentle</span>
+                                                    <span class="mode-desc">Slow, steady flow</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="mode-option">
+                                            <input type="radio" id="normal" name="mode" value="normal">
+                                            <label for="normal">
+                                                <div class="mode-icon">💧</div>
+                                                <div class="mode-info">
+                                                    <span class="mode-name">Normal</span>
+                                                    <span class="mode-desc">Standard flow rate</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="mode-option">
+                                            <input type="radio" id="intensive" name="mode" value="intensive">
+                                            <label for="intensive">
+                                                <div class="mode-icon">🌊</div>
+                                                <div class="mode-info">
+                                                    <span class="mode-name">Intensive</span>
+                                                    <span class="mode-desc">Fast, thorough watering</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-section">
+                                    <h4>Schedule Options</h4>
+                                    <div class="schedule-options">
+                                        <div class="schedule-option">
+                                            <input type="checkbox" id="scheduleRepeat">
+                                            <label for="scheduleRepeat">Repeat daily at this time</label>
+                                        </div>
+                                        <div class="schedule-option">
+                                            <input type="checkbox" id="weatherCheck">
+                                            <label for="weatherCheck">Skip if rain is forecasted</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="water-summary">
+                                    <h4>Watering Summary</h4>
+                                    <div class="summary-content" id="wateringSummary">
+                                        <p>Select plants to see watering summary</p>
+                                    </div>
+                                </div>
+
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary btn-large" id="startWateringBtn" onclick="startWatering()" disabled>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+                                        </svg>
+                                        Start Watering
+                                    </button>
+                                    <button class="btn btn-outline" onclick="testSystem()">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
+                                        </svg>
+                                        Test System
+                                    </button>
+                                    <button class="btn btn-outline" onclick="emergencyStop()">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M10,9V15H14V9"/>
+                                        </svg>
+                                        Emergency Stop
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Watering Progress Modal -->
+                <div id="wateringModal" class="modal-overlay hidden">
+                    <div class="modal-card">
+                        <div class="modal-content">
+                            <h2>Watering in Progress</h2>
+                            <div class="watering-progress">
+                                <div class="progress-circle">
+                                    <svg class="progress-ring" width="120" height="120">
+                                        <circle class="progress-ring-circle" stroke="var(--accent-blue)" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
+                                    </svg>
+                                    <div class="progress-text">
+                                        <span id="progressPercent">0%</span>
+                                    </div>
+                                </div>
+                                <div class="progress-info">
+                                    <p id="currentPlant">Starting watering...</p>
+                                    <p id="progressStatus">Preparing system...</p>
+                                </div>
+                            </div>
+                            <div class="progress-actions">
+                                <button class="btn btn-outline" onclick="pauseWatering()">Pause</button>
+                                <button class="btn btn-outline" onclick="stopWatering()">Stop</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/water.js"></script>
+</body>
+</html>

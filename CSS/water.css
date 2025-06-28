@@ -1,0 +1,405 @@
+/* Water Now Page Specific Styles */
+.water-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .water-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .water-header h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .water-header p {
+    color: var(--text-muted);
+    font-size: var(--font-size-lg);
+  }
+  
+  .water-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+  
+  /* Plant Selection */
+  .plant-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+  
+  .water-plant-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+  }
+  
+  .water-plant-card:hover {
+    border-color: var(--accent-orange);
+    background-color: var(--bg-tertiary);
+  }
+  
+  .water-plant-card.selected {
+    border-color: var(--accent-orange);
+    background-color: var(--accent-orange-light);
+  }
+  
+  .plant-checkbox {
+    position: relative;
+  }
+  
+  .plant-checkbox input[type="checkbox"] {
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+  
+  .plant-checkbox input[type="checkbox"]:checked {
+    background-color: var(--accent-orange);
+    border-color: var(--accent-orange);
+  }
+  
+  .plant-checkbox input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 0.875rem;
+  }
+  
+  .plant-image {
+    width: 4rem;
+    height: 4rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .plant-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .plant-info {
+    flex: 1;
+  }
+  
+  .plant-info h4 {
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .plant-status {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .plant-details p {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    margin: 0;
+  }
+  
+  /* Water Controls */
+  .control-section {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-primary);
+  }
+  
+  .control-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  .control-section h4 {
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  /* Amount Controls */
+  .amount-presets {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+  
+  .preset-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+  
+  .preset-btn:hover {
+    border-color: var(--accent-orange);
+  }
+  
+  .preset-btn.active {
+    background-color: var(--accent-orange);
+    border-color: var(--accent-orange);
+    color: white;
+  }
+  
+  .custom-amount label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .custom-amount input {
+    width: 100%;
+    max-width: 200px;
+    padding: 0.5rem;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+  
+  /* Mode Selection */
+  .mode-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .mode-option {
+    position: relative;
+  }
+  
+  .mode-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .mode-option label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+  
+  .mode-option input[type="radio"]:checked + label {
+    border-color: var(--accent-orange);
+    background-color: var(--accent-orange-light);
+  }
+  
+  .mode-icon {
+    font-size: 1.5rem;
+  }
+  
+  .mode-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mode-name {
+    font-weight: 600;
+  }
+  
+  .mode-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+  }
+  
+  /* Schedule Options */
+  .schedule-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .schedule-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .schedule-option input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .schedule-option label {
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+  }
+  
+  /* Water Summary */
+  .water-summary {
+    background-color: var(--bg-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+  }
+  
+  .summary-content {
+    margin-top: var(--spacing-sm);
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+  }
+  
+  .summary-total {
+    font-weight: 600;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-primary);
+  }
+  
+  /* Action Buttons */
+  .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--spacing-lg);
+  }
+  
+  .btn-large {
+    padding: 1rem 1.5rem;
+    font-size: var(--font-size-base);
+  }
+  
+  /* Watering Progress Modal */
+  .watering-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .progress-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .progress-ring {
+    transform: rotate(-90deg);
+  }
+  
+  .progress-ring-circle {
+    stroke-dasharray: 326.73;
+    stroke-dashoffset: 326.73;
+    transition: stroke-dashoffset 0.5s ease;
+  }
+  
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  
+  .progress-info {
+    text-align: center;
+  }
+  
+  .progress-info p {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+  }
+  
+  .progress-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: var(--spacing-md);
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .plant-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .mode-selection {
+      flex-direction: row;
+    }
+  
+    .mode-option {
+      flex: 1;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .water-content {
+      flex-direction: row;
+      gap: var(--spacing-xl);
+    }
+  
+    .plant-selection,
+    .water-controls {
+      flex: 1;
+    }
+  
+    .plant-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .water-layout {
+      padding: var(--spacing-md) 0;
+    }
+  
+    .water-header h1 {
+      font-size: var(--font-size-2xl);
+    }
+  
+    .water-plant-card {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .action-buttons {
+      flex-direction: column;
+    }
+  
+    .amount-presets {
+      justify-content: center;
+    }
+  }
+  
